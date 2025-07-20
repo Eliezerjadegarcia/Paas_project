@@ -1,16 +1,13 @@
-# Use a small web server image
 FROM nginx:alpine
 
-# Set working directory
-WORKDIR /usr/share/nginx/html
+# Remove default nginx config
+RUN rm /etc/nginx/conf.d/default.conf
 
-# Remove default HTML files
-RUN rm -rf ./*
+# Copy custom nginx config that listens on port 8080
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy your site files into the image
-COPY . .
+# Copy website files
+COPY . /usr/share/nginx/html
 
-# Expose the port nginx is using
+# Expose port 8080 (required by Cloud Run)
 EXPOSE 8080
-
-# Nginx runs automatically on container start
