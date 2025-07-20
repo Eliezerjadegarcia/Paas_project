@@ -11,6 +11,6 @@ RUN rm -rf ./*
 COPY . .
 
 # Expose the port nginx is using
-EXPOSE 80
+EXPOSE 8080
 
 # Nginx runs automatically on container start
